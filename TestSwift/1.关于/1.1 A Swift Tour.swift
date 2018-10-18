@@ -163,7 +163,126 @@ func ControlFlow() {
 //TODO:函数和闭包（Functions and Closures）
 
 func FunctionsClosures() {
+    // 声明一个函数  通过名字和参数来调用，->指定返回值
     
+    //默认情况下，函数使用它们的参数名称作为它们参数的标签，在参数名称前可以自定义参数标签，或者使用 _ 表示不使用参数标签。
+    func greet1(person: String, day: String) -> String {
+        return "Hello \(person), today is \(day)."
+    }
+    print(greet1(person:"Bob", day: "Tuesday"))
+    
+    func greet2(_ person: String, on day: String) -> String {
+        return "Hello \(person), today is \(day)."
+    }
+    print(greet2("John", on: "Wednesday"))
+    
+    
+    func calculateStatistics(scores: [Int]) -> (min:Int, max:Int, sum:Int) {
+        var min = scores[0]
+        var max = scores[0]
+        var sum = 0
+        
+        for score in scores {
+            if score > max {
+                max = score
+            } else if score < min {
+                min = score
+            }
+            sum += score;
+        }
+        
+        return (min, max, sum)
+    }
+    
+    let statistics = calculateStatistics(scores:[5, 3, 100, 3, 9])
+    print(statistics.min, statistics.max, statistics.sum)
+    print(statistics.0, statistics.1, statistics.2)
+    
+    
+    //函数可以携带可变个数的参数 表现形式是数组
+    func sumOf(numbers : Int...) -> Int {
+        var sum = 0
+        for numberItem in numbers {
+            sum += numberItem
+        }
+        return sum
+    }
+    print(sumOf())
+    print(sumOf(numbers: 42, 555, 10))
+    
+    
+    //函数可以嵌套。被嵌套的函数可以访问外侧函数的变量，你可以使用嵌套函数来重构一个太长或者太复杂的函数。
+    func returnFifteen() -> Int {
+        var y = 1
+        
+        func add() {
+            y += 10
+        }
+        
+        add()
+        add()
+        add()
+        
+        return y
+    }
+    print(returnFifteen())
+    
+    
+    //函数是第一等类型，这意味着函数可以作为另一个函数的返回值。
+    func makeIncrementer() -> ((Int) -> Int) {
+        
+        func addOne(number : Int) -> Int {
+            return 1+number
+        }
+        return addOne
+    }
+    var increment = makeIncrementer()
+    print(increment(7))
+    
+    
+    //函数也可以当做参数传入另一个函数。
+    func hasAnymatches(list: [Int], condition:(Int) -> Bool) -> Bool {
+    
+        for item in list {
+            if condition(item) {
+                return true
+            }
+        }
+    
+        return false
+    }
+    
+    func lessThanTen(number:Int) -> Bool {
+        return number < 10
+    }
+    
+    let testNumbers = [20, 19, 7, 12]
+    //hasAnymatches(list: numbers, condition: lessThanTen)
+    print(hasAnymatches(list: testNumbers, condition: lessThanTen))
+    
+    
+    //函数是一种特殊的闭包 一段能之后被调取的代码 闭包中的代码能访问闭包作用域中的变量和函数
+    //即使闭包是在一个不同的作用域被执行，可以使用 {} 来创建一个匿名闭包，使用 in 将参数和返回值类型的声明与闭包分离
+    
+    let numbers = [20, 19, 7, 12]
+//    numbers.map({
+//        (number: Int) -> Int in
+//        let tmpNum = 3 * number
+//        return tmpNum
+//    })
+    
+    //有很多种创建更简洁的闭包的方法。
+    //如果一个闭包的类型已知，比如作为一个代理的回调，可以忽略参数、返回值。单个语句闭包会把它语句的值当做结果返回。
+    let mappedNumbers = numbers.map({ number in 3 * number })
+    print(mappedNumbers)
+    
+    //通过参数位置而不是参数名字来引用参数，这个方法在非常短的闭包中非常有用。
+    //当一个闭包作为最后一个参数传给一个函数的时候，可以直接跟在括号后面。
+    //当一个闭包是传给函数的唯一参数，可以忽略括号。
+    let sortedNumbers = numbers.sorted { $0 > $1 }
+    print(sortedNumbers)
+    
+
 }
 
 //TODO:对象和类（Objects and Classes）
