@@ -289,6 +289,128 @@ func FunctionsClosures() {
 
 func ObjectsClasses() {
     
+    // 使用 class 和类名来创建一个类。类中属性的声明和常量、变量声明一样，唯一的区别就是它们的上下文是类。
+    //同样，方法和函数声明也一样
+    class Shape {
+        var numberOfSides = 0
+        func simpleDescription() -> String {
+            return "A shape with \(numberOfSides) sides."
+        }
+    }
+    
+//    var shapeObj = Shape()
+//    shapeObj.numberOfSides = 7
+//    var shapeDescription = shapeObj.simpleDescription()
+//    print(shapeDescription)
+
+    
+    
+    //这个版本的 Shape 类缺少了一些重要的东西：一个构造函数来初始化类实例。使用 init 来创建一个构造器。
+    class NamedShape {
+        var numberOfSide:Int = 0
+        var name:String
+        
+        init(name:String) {
+            self.name = name
+        }
+        func simpleDescription() -> String {
+            return "A shape with \(numberOfSide) sides."
+        }
+    }
+    
+//    var namedShapeObj = NamedShape.init(name: "YUECHEN")
+    
+    
+    //注意 self 被用来区别实例变量 name 和构造器的参数 name。当你创建实例的时候，像传入函数参数一样给类传入构造器的参数。每个属性都需要赋值——无论是通过声明（就像 numberOfSides）还是通过构造器（就像  name）。
+    
+    //如果你需要在删除对象之前进行一些清理工作，使用 deinit 创建一个析构函数。
+    
+    //子类的定义方法是在它们的类名后面加上父类的名字，用冒号分割。创建类的时候并不需要一个标准的根类，所以你可以根据需要添加或者忽略父类。
+    
+    //子类如果要重写父类的方法的话，需要用 override 标记——如果没有添加 override 就重写父类方法的话编译器会报错。编译器同样会检测 override 标记的方法是否确实在父类中。
+    
+    class Square:NamedShape {
+        var sideLength : Double
+        
+        init(sideLength:Double, name:String) {
+            self.sideLength = sideLength
+            super.init(name: name)
+            numberOfSide = 4
+        }
+        
+        func area() -> Double {
+            return sideLength * sideLength
+        }
+        
+        override func simpleDescription() -> String {
+            return "a squre with sides of length \(sideLength)"
+        }
+    }
+    
+//    let test = Square(sideLength: 5.2, name: "my test square")
+//    test.area()
+//    test.simpleDescription()
+    
+    
+    class EquilateralTriangle: NamedShape {
+        var sideLength: Double = 0.0
+        
+        init(sideLength: Double, name: String) {
+            self.sideLength = sideLength
+            super.init(name: name)
+            numberOfSide = 3
+        }
+        
+        var perimeter: Double {
+            get {
+                return 3.0 * sideLength
+            }
+            set {
+                sideLength = newValue / 3.0
+            }
+        }
+        
+        override func simpleDescription() -> String {
+            return "An equilateral triangle with sides of length \(sideLength)."
+        }
+    }
+//    var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
+//    print(triangle.perimeter)
+//    triangle.perimeter = 9.9
+//    print(triangle.sideLength)
+    
+    
+    class TriangleAndSquare {
+        
+        var triangle: EquilateralTriangle {
+            willSet {
+                square.sideLength = newValue.sideLength
+            }
+        }
+        
+        var square: Square {
+            willSet {
+                triangle.sideLength = newValue.sideLength
+            }
+        }
+        
+        init(size:Double, name:String) {
+            square = Square(sideLength: size, name: name)
+            triangle = EquilateralTriangle(sideLength: size, name: name)
+        }
+    }
+    
+//    var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
+//    print(triangleAndSquare.square.sideLength)
+//    print(triangleAndSquare.triangle.sideLength)
+    
+    //处理变量的可选 可以在操作之前加？
+    //如果?之前的值是nil  ?后面的东西会被忽略 整个表达式返回nil   否则?之后的东西都会被运行
+    //两种情况  整个表达式的值是可选值
+//    let optionalSquare : Square? = Square(sideLength: 2.5, name: "optional square")
+//    let sideLength = optionalSquare?.sideLength
+    
+
 }
 
 
