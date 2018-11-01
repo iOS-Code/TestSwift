@@ -10,6 +10,7 @@
 		B0120AB0217078EF005E1128 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0120AAF217078EF005E1128 /* main.swift */; };
 		B0120AC321708615005E1128 /* 1.1 A Swift Tour.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0120AC221708615005E1128 /* 1.1 A Swift Tour.swift */; };
 		B0120AC521708A2B005E1128 /* Homework1012.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0120AC421708A2B005E1128 /* Homework1012.swift */; };
+		B0B5A866218AEF4200996E2F /* 2.23 Generics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B5A865218AEF4200996E2F /* 2.23 Generics.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,7 @@
 		B0120AAF217078EF005E1128 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B0120AC221708615005E1128 /* 1.1 A Swift Tour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "1.1 A Swift Tour.swift"; sourceTree = "<group>"; };
 		B0120AC421708A2B005E1128 /* Homework1012.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homework1012.swift; sourceTree = "<group>"; };
+		B0B5A865218AEF4200996E2F /* 2.23 Generics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "2.23 Generics.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 		B0120ABC217079FA005E1128 /* 2.基础 */ = {
 			isa = PBXGroup;
 			children = (
+				B0B5A865218AEF4200996E2F /* 2.23 Generics.swift */,
 			);
 			path = "2.基础";
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 			files = (
 				B0120AB0217078EF005E1128 /* main.swift in Sources */,
 				B0120AC321708615005E1128 /* 1.1 A Swift Tour.swift in Sources */,
+				B0B5A866218AEF4200996E2F /* 2.23 Generics.swift in Sources */,
 				B0120AC521708A2B005E1128 /* Homework1012.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
